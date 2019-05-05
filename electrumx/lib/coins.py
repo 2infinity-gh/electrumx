@@ -846,7 +846,8 @@ class BitcoinCZ(Coin):
     def header_hash(cls, header):
         version, = util.unpack_le_uint32_from(header)
         if version <= 3:
-            return double_sha256(header)
+            import lyra2z_hash
+            return lyra2z_hash.getPoWHash(header)
 
 
 class Unitus(Coin):
