@@ -811,7 +811,7 @@ class Bitcoinzero(Coin):
     PEERS = []
 
 
-# Source: https://github.com/BitcoinCZ/bitcoincz
+# Source: https://github.com/Bitcostatic_header_offsetinCZ/bitcoincz
 class BitcoinCZ(Coin):
     NAME = "BitcoinCZ"
     SHORTNAME = "BCZ"
@@ -828,9 +828,6 @@ class BitcoinCZ(Coin):
     PEER_DEFAULT_PORTS = {"t": "50001", "s": "50002"}
     RPC_PORT = 29501
     REORG_LIMIT = 5000
-    BASIC_HEADER_SIZE = 112
-
-
 
 
 class Unitus(Coin):
