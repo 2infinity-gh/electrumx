@@ -829,11 +829,10 @@ class BitcoinCZ(Coin):
     RPC_PORT = 29501
     REORG_LIMIT = 5000
     BASIC_HEADER_SIZE = 80
-	PEERS = []
 	HDR_V4_SIZE = 112
     HDR_V4_HEIGHT = 6789
     HDR_V4_START_OFFSET = HDR_V4_HEIGHT * BASIC_HEADER_SIZE
-    
+
 
     @classmethod
     def static_header_offset(cls, height):
