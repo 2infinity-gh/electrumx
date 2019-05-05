@@ -842,6 +842,12 @@ class BitcoinCZ(Coin):
         else:
             return height * cls.BASIC_HEADER_SIZE
 
+    @classmethod
+    def header_hash(cls, header):
+        version, = util.unpack_le_uint32_from(header)
+        if version <= 3:
+            return double_sha256(header)
+
 
 class Unitus(Coin):
     NAME = "Unitus"
