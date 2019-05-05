@@ -811,6 +811,40 @@ class Bitcoinzero(Coin):
     PEERS = []
 
 
+# Source: https://github.com/BitcoinCZ/bitcoincz
+class BitcoinCZ(Coin):
+    NAME = "BitcoinCZ"
+    SHORTNAME = "BCZ"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("0488b21e")
+    XPRV_VERBYTES = bytes.fromhex("0488ade4")
+    P2PKH_VERBYTE = bytes.fromhex("19")
+    P2SH_VERBYTES = [bytes.fromhex("14")]
+    WIF_BYTE = bytes.fromhex("d2")
+    GENESIS_HASH = '00000fca55bd94508769f48d6d17c4aa3f9ae40b072036a3691752f1b70ef2dd'
+    TX_COUNT = 1200
+    TX_COUNT_HEIGHT = 2400
+    TX_PER_BLOCK = 2
+    PEER_DEFAULT_PORTS = {"t": "50001", "s": "50002"}
+    RPC_PORT = 29501
+    REORG_LIMIT = 5000
+    BASIC_HEADER_SIZE = 80
+	PEERS = []
+	HDR_V4_SIZE = 112
+    HDR_V4_HEIGHT = 6789
+    HDR_V4_START_OFFSET = HDR_V4_HEIGHT * BASIC_HEADER_SIZE
+    
+
+    @classmethod
+    def static_header_offset(cls, height):
+        assert cls.STATIC_BLOCK_HEADERS
+        if height >= cls.HDR_V4_HEIGHT:
+            relative_v4_offset = (height - cls.HDR_V4_HEIGHT) * cls.HDR_V4_SIZE
+            return cls.HDR_V4_START_OFFSET + relative_v4_offset
+        else:
+            return height * cls.BASIC_HEADER_SIZE
+
+
 class Unitus(Coin):
     NAME = "Unitus"
     SHORTNAME = "UIS"
