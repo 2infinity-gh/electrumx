@@ -828,6 +828,19 @@ class BitcoinCZ(Coin):
     PEER_DEFAULT_PORTS = {"t": "50001", "s": "50002"}
     RPC_PORT = 29501
     REORG_LIMIT = 5000
+	BASIC_HEADER_SIZE = 80
+    HDR_V4_SIZE = 112
+    HDR_V4_HEIGHT = 6799
+    HDR_V4_START_OFFSET = HDR_V4_HEIGHT * BASIC_HEADER_SIZE
+	
+	@classmethod
+    def static_header_offset(cls, height):
+        assert cls.STATIC_BLOCK_HEADERS
+        if height >= cls.HDR_V4_HEIGHT:
+            relative_v4_offset = (height - cls.HDR_V4_HEIGHT) * cls.HDR_V4_SIZE
+            return cls.HDR_V4_START_OFFSET + relative_v4_offset
+        else:
+            return height * cls.BASIC_HEADER_SIZE
 
 
 class Unitus(Coin):
