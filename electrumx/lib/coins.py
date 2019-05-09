@@ -812,7 +812,7 @@ class Bitcoinzero(Coin):
 
 
 # Source: https://github.com/Bitcostatic_header_offsetinCZ/bitcoincz
-class BitcoinCZ(Dash):
+class BitcoinCZ(Coin):
     NAME = "BitcoinCZ"
     SHORTNAME = "BCZ"
     NET = "mainnet"
@@ -829,8 +829,31 @@ class BitcoinCZ(Dash):
     RPC_PORT = 29501
     REORG_LIMIT = 5000
 
+    BASIC_HEADER_SIZE = 80
+    HDR_V4_SIZE = 112
+    HDR_V4_HEIGHT = 6789
+    HDR_V4_START_OFFSET = HDR_V4_HEIGHT * BASIC_HEADER_SIZE
+
     SESSIONCLS = DashElectrumX
     DAEMON = daemon.DashDaemon
+
+    @classmethod
+    def static_header_offset(cls, height):
+        assert cls.STATIC_BLOCK_HEADERS
+        if height >= cls.HDR_V4_HEIGHT:
+            relative_v4_offset = (height - cls.HDR_V4_HEIGHT) * cls.HDR_V4_SIZE
+            return cls.HDR_V4_START_OFFSET + relative_v4_offset
+        else:
+            return height * cls.BASIC_HEADER_SIZE
+
+    @classmethod
+    def header_hash(cls, header):
+        version, = util.unpack_le_uint32_from(header)
+        if version >= 4:
+            return super().header_hash(header)
+        else:
+            import quark_hash
+            return quark_hash.getPoWHash(header)
 
 
 class Unitus(Coin):
