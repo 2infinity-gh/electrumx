@@ -812,7 +812,7 @@ class Bitcoinzero(Coin):
 
 
 # Source: https://github.com/Bitcostatic_header_offsetinCZ/bitcoincz
-class BitcoinCZ(Coin):
+class BitcoinCZ(Dash):
     NAME = "BitcoinCZ"
     SHORTNAME = "BCZ"
     NET = "mainnet"
