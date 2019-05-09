@@ -829,7 +829,7 @@ class BitcoinCZ(Coin):
     RPC_PORT = 29501
     REORG_LIMIT = 5000
     BASIC_HEADER_SIZE = 180
-	
+
 
 class Unitus(Coin):
     NAME = "Unitus"
