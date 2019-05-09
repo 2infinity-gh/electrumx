@@ -828,7 +828,7 @@ class BitcoinCZ(Coin):
     PEER_DEFAULT_PORTS = {"t": "50001", "s": "50002"}
     RPC_PORT = 29501
     REORG_LIMIT = 5000
-    BASIC_HEADER_SIZE = 112
+    BASIC_HEADER_SIZE = 180
 	
 
 class Unitus(Coin):
