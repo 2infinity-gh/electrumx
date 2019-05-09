@@ -834,9 +834,6 @@ class BitcoinCZ(Coin):
     HDR_V4_HEIGHT = 6789
     HDR_V4_START_OFFSET = HDR_V4_HEIGHT * BASIC_HEADER_SIZE
 
-    SESSIONCLS = DashElectrumX
-    DAEMON = daemon.DashDaemon
-
     @classmethod
     def static_header_offset(cls, height):
         assert cls.STATIC_BLOCK_HEADERS
@@ -848,7 +845,7 @@ class BitcoinCZ(Coin):
 
     @classmethod
     def header_hash(cls, header):
-        version, = util.unpack_le_uint32_from(header)
+        version = util.unpack_le_uint32_from(header)
         if version >= 4:
             return super().header_hash(header)
         else:
