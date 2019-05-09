@@ -846,7 +846,7 @@ class BitcoinCZ(Coin):
         else:
             return height * cls.BASIC_HEADER_SIZE
 
-     @classmethod
+    @classmethod
     def header_hash(cls, header):
         version, = util.unpack_le_uint32_from(header)
         if version >= 4:
