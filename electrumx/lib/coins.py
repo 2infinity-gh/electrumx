@@ -846,7 +846,7 @@ class BitcoinCZ(Coin):
     @classmethod
     def header_hash(cls, header):
         version = util.unpack_le_uint32_from(header)
-        if version >= 4:
+        if version == 4:
             return super().header_hash(header)
         else:
             import quark_hash
