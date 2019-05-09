@@ -845,7 +845,7 @@ class BitcoinCZ(Coin):
     @classmethod
     def header_hash(cls, header):
         version, = util.unpack_le_uint32_from(header)
-        if version == 3:
+        if version == 2:
             return sha256(header)
 
 
